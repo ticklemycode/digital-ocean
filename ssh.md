@@ -38,8 +38,10 @@ Host server-name
 
 ---
 ### to use multiple accounts on github
+> Replace USERNAME with your GitHub usernames
+
 ```bash
-Host github.com-NAME
+Host github.com-USERNAME
     HostName github.com
     User USERNAME
     IdentityFile ~/.ssh/KEY_NAME.pub
@@ -48,8 +50,8 @@ Host github.com-NAME
 #### update get remote url
 ```bash
 > git remote get-url origin
-git@github.com-<NAME>/digital-ocean.git
+git@github.com-<USERNAME>/digital-ocean.git
 
-> git remote set-url origin git@github.com-<NAME>:<REPO>/digital-ocean.git
-git@github.com-<NAME>:<REPO>/digital-ocean.git
+> git remote set-url origin git@github.com-<USERNAME>:<REPO>/digital-ocean.git
+git@github.com-<USERNAME>:<REPO>/digital-ocean.git
 ```
