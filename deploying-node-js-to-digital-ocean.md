@@ -25,7 +25,7 @@ Save the private key as privatekey.ppk (or whatever you want)
 Go back to the Digital Ocean page and paste in the key and name it
 Continue to create your droplet
 
-###Connect via Putty
+### Connect via Putty
 Once your droplet is setup, open up Putty.exe
 
 Type in your server/droplet IP address in Host name
@@ -117,7 +117,7 @@ You can test out the password and root login now if you want to make sure it doe
 
 ### Install Node.js On The Server
 ```bash
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt-get install nodejs
 
 # Now node should be installed. To check use
@@ -125,7 +125,9 @@ node -v
 ```
 
 ### Install Git On The Server
+```bash
 sudo apt-get install git
+```
 
 ### Create SSH Key For Github
 Now you need to create your SSH key got Github
@@ -154,10 +156,12 @@ Now go to your browser and put http://YOURSERVERIP:5000 and you should see your 
 Stop the app with ctrl + c
 
 ### Install PM2
+[node-forever vs pm2 vs other?](https://hashnode.com/post/node-forever-vs-pm2-vs-other-cimpvw1o900i0wz53chiyrcbd)
+
 Install PM2 so you can run the app as a process
 ```bash
 sudo npm install pm2 -g
-pm2 start index.js
+pm2 start --name myapp index.js
 ```
 
 Your app should now be running as a process

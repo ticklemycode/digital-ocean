@@ -1,5 +1,7 @@
+Reference: [Multiple SSH Keys settings for different github account](https://gist.github.com/jexchan/2351996) & [How to Work with GitHub and Multiple Accounts](https://www.youtube.com/watch?v=fnSRBRiQIU8)
+
 ## Generating a new SSH key and adding it to the ssh-agent 
->`-t rsa` Specifies the type of key you are creating, in this instance is an RSA key
+>`-t rsa` Specifies the type of key you are creating, in this instance is an RSA key <br>
 >`-C email@email.com` This puts a comment at the end of your public key so its easier to see which key is yours
 
 ```bash
