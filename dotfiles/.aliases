@@ -1,0 +1,79 @@
+# Aliases in this file are bash and zsh compatible
+# .aliases
+
+# disk usage
+alias duse='df -h'
+
+# zshrc management 
+alias edz='subl ~/.zshrc'
+alias edztheme='subl ~/.oh-my-zsh/themes/mothership.zsh-theme'
+alias srcz='source ~/.zshrc'
+
+# PS
+alias psg="ps aux | grep "
+
+# Show human friendly numbers and colors
+alias df='df -h'
+alias ll='ls -alGh'
+
+# Zippin
+alias gz='tar -zcvf'
+
+# monitoring log
+alias monitorlog='tail -n 15 . | grep -v -E "pattern1|pattern1"'
+
+# Git Aliases
+alias gco='git checkout'
+alias gco.='git checkout .'
+alias gc='git commit'
+alias gs='git status'
+alias gstsh='git stash'
+alias gst='git stash'
+alias gsh='git show'
+alias gshw='git show'
+alias gshow='git show'
+alias gi='vi .gitignore'
+alias gcm='git ci -m'
+alias gcim='git ci -m'
+alias gci='git ci'
+alias ga='git add -A'
+alias ga.='git add -A .'
+alias guns='git unstage'
+alias gunc='git uncommit'
+alias gm='git merge'
+alias gms='git merge --squash'
+alias gam='git commit --amend --no-edit'
+alias gr='git rebase'
+alias gra='git rebase --abort'
+alias grc='git rebase --continue'
+alias gbi='git rebase --interactive'
+alias gib='git branch'
+alias gl='git l'
+alias glg='git l'
+alias glog='git l'
+alias co='git co'
+alias gf='git fetch'
+alias gfo='git fetch origin'
+alias gfop='git fetch origin --prune'
+alias gfch='git fetch'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gpub='grb publish'
+alias gtr='grb track'
+alias gpl='git pull'
+alias gplr='git pull --rebase'
+alias gps='git push'
+alias gpsh='git push'
+alias gnb='git nb' # new branch aka checkout -b
+alias grs='git reset' 
+alias grsh='git reset --hard'
+alias gcln='git clean'
+alias gclndf='git clean -df'
+alias gsm='git submodule'
+alias gsmi='git submodule init'
+alias gsmu='git submodule update'
+alias gt='git t'
+
+
+
+

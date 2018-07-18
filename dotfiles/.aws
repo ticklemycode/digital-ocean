@@ -1,0 +1,12 @@
+# AWS Helpers
+# .aws
+
+# AWS ssh helper 
+function ssh-aws {
+    ssh -i ~/.ssh/CL-KP-VPC-IAD-NFL.pem admin@`aws_ip_of $1`
+}
+
+# Get AWS EC2 IP address
+function aws_ip_of {
+  aws ec2 describe-instances --output text --max-items 1 --filters "Name=tag:Name,Values=$1*" "Name=instance-state-name,Values=running" --query 'Reservations[*].Instances[*].PrivateIpAddress'
+}

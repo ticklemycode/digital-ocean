@@ -1,0 +1,145 @@
+# Functions in this file are bash and zsh compatible
+# .functions
+
+# Get IPs
+function ip() {
+    ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\  -f2
+}
+
+
+# Change Java Version
+function chjava(){
+    export JAVA_HOME=`/usr/libexec/java_home -v $1`
+    echo -e "Current JAVA_HOME: ${JAVA_HOME}"
+}
+
+
+# Create a new directory and enter it
+function mkd() {
+	mkdir -p "$@" && cd "$_";
+}
+
+
+# Determine size of a file or total size of a directory
+function fs() {
+	if du -b /dev/null > /dev/null 2>&1; then
+		local arg=-sbh;
+	else
+		local arg=-sh;
+	fi
+	if [[ -n "$@" ]]; then
+		du $arg -- "$@";
+	else
+		du $arg .[^.]* ./*;
+	fi;
+}
+
+
+# `o` with no arguments opens the current directory, otherwise opens the given
+# location
+function o() {
+	if [ $# -eq 0 ]; then
+		open .;
+	else
+		open "$@";
+	fi;
+}
+
+
+# Create a data URL from a file
+function dataurl() {
+	local mimeType=$(file -b --mime-type "$1");
+	if [[ $mimeType == text/* ]]; then
+		mimeType="${mimeType};charset=utf-8";
+	fi
+	echo "data:${mimeType};base64,$(openssl base64 -in "$1" | tr -d '\n')";
+}
+
+
+# Decompress just about any compressed file format
+function extract {
+ if [ -z "$1" ]; then
+    # display usage if no parameters given
+    echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+    echo "       extract <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
+    return 1
+ else
+    for n in $@
+    do
+      if [ -f "$n" ] ; then
+          case "${n%,}" in
+            *.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz|*.tar) 
+                         tar xvf "$n"       ;;
+            *.lzma)      unlzma ./"$n"      ;;
+            *.bz2)       bunzip2 ./"$n"     ;;
+            *.rar)       unrar x -ad ./"$n" ;;
+            *.gz)        gunzip ./"$n"      ;;
+            *.zip)       unzip ./"$n"       ;;
+            *.z)         uncompress ./"$n"  ;;
+            *.7z|*.arj|*.cab|*.chm|*.deb|*.dmg|*.iso|*.lzh|*.msi|*.rpm|*.udf|*.wim|*.xar)
+                         7z x ./"$n"        ;;
+            *.xz)        unxz ./"$n"        ;;
+            *.exe)       cabextract ./"$n"  ;;
+            *)
+                         echo "extract: '$n' - unknown archive method"
+                         return 1
+                         ;;
+          esac
+      else
+          echo "'$n' - file does not exist"
+          return 1
+      fi
+    done
+ fi
+}
+
+# Most commonly used commands
+function mostUsed {
+	history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
+}
+
+
+# Find in folder
+function fname() {
+	if [ $# -eq 0 ]; then
+		echo "Must profile file name..."
+	else
+		find . -name "$@*"
+	fi;
+}
+
+# Find all files of type X in folder
+function fatype() {
+	if [ $# -eq 0 ]; then
+		echo "Must provide file type, e.g., jpg, gif, json"
+	else
+		find / -iname "*.$@"
+	fi;
+}
+
+
+# Tail logs
+function taillogs(){
+	tail -f /usr/local/clearleap/logs/central.log
+}
+
+# Tails for string in logs, includ 5 lines before and after
+function tailfor(){
+	if [ $# -eq 0 ]; then
+		echo "What are you looking for?"
+	else
+		echo "looking in /usr/local/clearleap/logs/central.log for $@"
+		tail -f /usr/local/clearleap/logs/central.log | grep -C 5 "$@"
+	fi;
+}
+
+# Tails log but excludes lines with string found
+function tailforx(){
+	if [ $# -eq 0 ]; then
+		echo "What are you wanting to exclude?"
+	else
+		echo "looking in /usr/local/clearleap/logs/central.log but excluding $@"
+		tail -f /usr/local/clearleap/logs/central.log | grep -v "$@"
+	fi;
+}
+

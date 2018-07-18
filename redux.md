@@ -6,10 +6,24 @@ Unidirectional Data Flow: data only flows in only one direction.
 
 > _It's easier to cross a one-way street than a two-way street._
 
+<img src="https://dzwonsemrish7.cloudfront.net/items/3M1T0b2L0r231M1u3n41/Image%202018-04-16%20at%209.46.57%20PM.png?v=46a64323" />
+
 ## Store
 ## Actions
+Actions are payloads of information that send data from your application to your store. They are the only source of information for the store. You send them to the store using store.dispatch().
+
+```js
+{
+  type: ADD_TODO,
+  text: 'Build my first Redux app'
+}
+```
+
 ## Action Creators
 Action Creators are just functions that taken in some payload and return an Action.
+
+>Action creators are exactly that—functions that create actions. It's easy to conflate the terms “action” and “action creator”, so do your best to use the proper term.
+
 ```js
 export const toggleTodo = id => {
   return {
@@ -19,10 +33,14 @@ export const toggleTodo = id => {
 }
 ``` 
 
+>## Actions are automatically sent to all reducers.
+
 ## Reducers
 Reducers are _pure functions_ which mean they are predictable that with the same input you get the same output.
 
 You will need to pass in the initial _state_ and an _action_ to the reducer.
+
+The reducer returns the next state of the app.
 
 ```js
 const visibilityFilter = (state = 'SHOW_ALL', action) => {
